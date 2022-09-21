@@ -1,56 +1,51 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <style type="text/css">.text-center {
-        text-align: center;
-    }
-    </style>
-    <title>ADMIN'S PAGE</title>
+    <title>ADMIN PAGE</title>
 </head>
 <body>
-<h1 style="text-align: center;"><strong>ALL USERS</strong></h1>
 <br>
-<br>
-<div class="text-center"><input type="button" value="Add user" onclick="window.location.href = '/user-list/create-user'"/></div>
-<br>
-<br>
-<div class="text-center"><form th:action="@{/logout}" th:method="POST">
-    <input type="submit" value="Logout"/>
-</form></div>
+<div th:align="center" class="tg">
+    <h2>User List</h2>
+    <th>
+        <button><a href="/api/admin/create-user">Create user </a></button>
+    </th>
+    <br>
+    <br>
+    <table border="1" cellpadding="5">
+        <thead >
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>SURNAME</th>
+            <th>EMAIL</th>
+            <th>USERNAME</th>
+            <th>USER ROLE</th>
+            <th>ACTIONS</th>
 
-<br>
-<br>
-<table border="1" align="center" cellspacing="0" cellpadding="3">
-    <tr>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>email</th>
-        <th>Salary</th>
-        <th>Username</th>
-        <th>Role</th>
-        <th>Action</th>
+        </tr>
+        </thead>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.id}">...</td>
+            <td th:text="${user.name}">...</td>
+            <td th:utext="${user.surname}">...</td>
+            <td th:utext="${user.email}">...</td>
+            <td th:utext="${user.username}">...</td>
+            <td th:each="role : ${user.roles}">
+                <span th:text="${role.name}"> </span> </td>
 
+            <td>
+                <button><a th:href="@{/api/admin/update-user/{id}(id=${user.id})}">Update</a></button>
+                <button><a th:href="@{/api/admin/user-delete/{id}(id=${user.id})}">Delete</a></button>
+            </td>
 
-
-    </tr>
-    <tr  style="text-align:center" th:each="user : ${users}">
-        <td th:text="${user.getName()}">UserName</td>
-        <td th:text="${user.getSurname()}">Surname</td>
-        <td th:text="${user.getEmail()}">Email</td>
-        <td th:text="${user.getSalary()()}">Salary</td>
-        <td th:text="${user.getRoles()}">Role</td>
-
-        <td> <a th:href="@{/user-list/{id}/edit(id=${user.getId()})}">
-            <button type="button">Edit user </button></a>
-            <form th:method="DELETE" th:action="@{/user-list/{id}(id=${user.getId()})}">
-                <input type="submit" value = "Delete user"/>
-            </form>
-        </td>
-    </tr>
-</table>
-
-</form>
+        </tr>
+    </table>
+    <br><br>
+    <td>
+        <button><a th:href="@{/logout}">LOGOUT</a></button>
+    </td>
+</div>
 </body>
 </html>
