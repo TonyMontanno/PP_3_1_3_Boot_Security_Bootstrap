@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.entity;
+package ru.kata.spring.boot_security.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,11 +24,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return getName();
-    }
-
-    @Override
-    public String toString() {
         return getName();
     }
 }

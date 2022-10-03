@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.configs;
+package ru.kata.spring.boot_security.configs;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -17,11 +17,10 @@ public class SuccessUserHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (roles.contains("ROLE_ADMIN")) {
-            httpServletResponse.sendRedirect("/api/admin/user-list");
-        } else if(roles.contains("ROLE_USER")){
-            httpServletResponse.sendRedirect("/api/user/user-page");
-        }
-        else {
+            httpServletResponse.sendRedirect("/api/admin/adminpage");
+        } else if (roles.contains("ROLE_USER")) {
+            httpServletResponse.sendRedirect("/api/user/userpage");
+        } else {
             httpServletResponse.sendRedirect("/");
         }
     }
