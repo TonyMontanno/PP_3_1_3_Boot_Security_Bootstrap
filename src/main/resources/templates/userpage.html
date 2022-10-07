@@ -1,5 +1,6 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      lang="en">
 
 <head>
   <!-- Required meta tags -->
@@ -22,6 +23,7 @@
         <span class="align-middle font-weight-bold mr-1" th:text="${oneUser.getUsername()}"></span></b>
         <span class="align-middle mr-1">with roles:</span>
         <span class="align-middle" th:each="role:${oneUser.getRoles()}" th:text="${role.getName}"></span>
+
       </ul>
     </div>
 
@@ -71,12 +73,12 @@
                   <td th:text="${oneUser.getSurname()}"></td>
                   <td th:text="${oneUser.getAge()}"></td>
                   <td th:text="${oneUser.getUsername()}"></td>
-<!--                  <td th:text="${oneUser.getRoles()}"></td>-->
+                  <td th:text="${oneUser.roles}"></td>
 
 
-                  <td>
-                    <li th:each="role: ${oneUser.getRoles()}" th:text="${role.getName()}"></li>
-                  </td>
+<!--                  <td>-->
+<!--                    <li th:each="role: ${oneUser.getRoles()}" th:text="${role.getName()}"></li>-->
+<!--                  </td>-->
 
                 </table>
               </div>
