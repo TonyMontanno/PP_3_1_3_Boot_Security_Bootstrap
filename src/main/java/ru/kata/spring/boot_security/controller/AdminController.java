@@ -6,8 +6,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.entity.Role;
 import ru.kata.spring.boot_security.entity.User;
 import ru.kata.spring.boot_security.service.UserService;
+
+import java.util.List;
 
 @Controller
 @RequestMapping(name = "/api/admin")
@@ -26,9 +29,11 @@ public class AdminController {
     public String userList(Model model) {
         User user = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
+        List<Role> listRole = userService.listRoles();
         model.addAttribute("allUsers", userService.findAll());
         model.addAttribute("roles", userService.listRoles());
         model.addAttribute("userMain", user);
+        model.addAttribute("roles",listRole);
         return "adminpage";
     }
 

@@ -22,7 +22,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-xl-0">
         <span class="align-middle font-weight-bold mr-1" th:text="${oneUser.getUsername()}"></span></b>
         <span class="align-middle mr-1">with roles:</span>
-        <span class="align-middle" th:each="role:${oneUser.getRoles()}" th:text="${role.getName}"></span>
+        <span class="align-middle" th:each="role:${oneUser.getRoles()}" th:text="${role.getName.split('_')[1]}"></span>
 
       </ul>
     </div>
@@ -65,16 +65,28 @@
                     <th>Last Name</th>
                     <th>Age</th>
                     <th>Email</th>
+                    <th>Login</th>
                     <th>Role</th>
+
                   </tr>
 
-                  <td th:text="${oneUser.getId()}"></td>
-                  <td th:text="${oneUser.getName()}"></td>
-                  <td th:text="${oneUser.getSurname()}"></td>
-                  <td th:text="${oneUser.getAge()}"></td>
-                  <td th:text="${oneUser.getUsername()}"></td>
-                  <td th:text="${oneUser.roles}"></td>
+<!--                  <td th:text="${oneUser.getId()}"></td>-->
+<!--                  <td th:text="${oneUser.getName()}"></td>-->
+<!--                  <td th:text="${oneUser.getSurname()}"></td>-->
+<!--                  <td th:text="${oneUser.getAge()}"></td>-->
+<!--                  <td th:text="${oneUser.getUsername()}"></td>-->
+<!--                  <td th:text="${oneUser.roles}"></td>-->
 
+                  <tr th:each="user : ${users}">
+                    <td th:utext="${user.id}">...</td>
+                    <td th:text="${user.name}">...</td>
+                    <td th:utext="${user.surname}">...</td>
+                    <td th:utext="${user.age}">...</td>
+                    <td th:utext="${user.email}">...</td>
+                    <td th:utext="${user.username}">...</td>
+                    <td th:each="role : ${user.roles}">
+                      <span th:text="${role.name.split('_')[1]}"> </span> </td>
+                    <td>
 
 <!--                  <td>-->
 <!--                    <li th:each="role: ${oneUser.getRoles()}" th:text="${role.getName()}"></li>-->
